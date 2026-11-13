@@ -3,60 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HotelMenu - Menu Pilihan Terbaik</title>
+    <title>BUTTERFLY HOTEL - Reservasi & Katalog Kamar</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header class="header">
-        <div class="logo">Hotel Menu</div>
-        <p>Menu menarik,mudah di baca,mudah dipilih</p>
+<div class="container">
+    <!-- HEADER -->
+    <header>
+        <div class="logo-badge">BUTTERFLY HOTEL</div>
+        <h1>Kenyamanan Elegan di Setiap Momen</h1>
+        <p>Pilih kamar impian Anda, nikmati fasilitas eksklusif, dan dapatkan penawaran menginap terbaik.</p>
     </header>
 
-    <main class="container">
+    <!-- MENU KATALOG KAMAR & FASILITAS -->
+    <section class="catalog-section">
+        <h2 class="section-title">Menu Pilihan Kamar & Fasilitas</h2>
+        <div class="room-cards">
+            <!-- Kamar 1 -->
+            <div class="room-card">
+                <div class="room-header">
+                    <span class="room-tag">Favorit Hemat</span>
+                    <h3>Standard Butterfly</h3>
+                    <div class="room-price">Rp 350.000 <span>/ malam</span></div>
+                </div>
+                <ul class="facilities-list">
+                    <li>1 Kasur Queen Size</li>
+                    <li>AC & Smart TV 32"</li>
+                    <li>Wi-Fi Kecepatan Tinggi</li>
+                    <li>Kamar Mandi Dalam & Water Heater</li>
+                    <li>Pembuat Kopi & Teh Gratis</li>
+                </ul>
+                <button type="button" class="btn-select" onclick="selectRoomFromMenu('Standard')">Pilih Kamar Ini</button>
+            </div>
 
-        <section class="welcome">
-            <h1>Selamat Datang Dihotel Buterrfly!!</h1>
-            <p>Temukan Pilihan Treatment Terbaik </p>
-        </section>
+            <!-- Kamar 2 -->
+            <div class="room-card featured">
+                <div class="room-header">
+                    <span class="room-tag popular">Paling Populer</span>
+                    <h3>Deluxe Monarch</h3>
+                    <div class="room-price">Rp 650.000 <span>/ malam</span></div>
+                </div>
+                <ul class="facilities-list">
+                    <li>1 Kasur King Size + Sofa Santai</li>
+                    <li>Balkon Pribadi Pemandangan Taman</li>
+                    <li>Smart TV 43" (Netflix & YouTube)</li>
+                    <li>Kulkas Mini & Hair Dryer</li>
+                    <li>Gratis Akses Kolam Renang & Gym</li>
+                </ul>
+                <button type="button" class="btn-select" onclick="selectRoomFromMenu('Deluxe')">Pilih Kamar Ini</button>
+            </div>
 
-        <section class="search-section">
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Cari nama treatment atau relaksi..."
-            >
-        </section>
+            <!-- Kamar 3 -->
+            <div class="room-card">
+                <div class="room-header">
+                    <span class="room-tag luxury">Mewah & Luas</span>
+                    <h3>Royal Butterfly Suite</h3>
+                    <div class="room-price">Rp 1.250.000 <span>/ malam</span></div>
+                </div>
+                <ul class="facilities-list">
+                    <li>Ruang Tamu & Ruang Makan Terpisah</li>
+                    <li>Bathtub Jacuzzi Pribadi</li>
+                    <li>Pemandangan Kota 180 Derajat</li>
+                    <li>Gratis Sarapan Prasmanan (2 Orang)</li>
+                    <li>Layanan Antar-Jemput & VIP Lounge</li>
+                </ul>
+                <button type="button" class="btn-select" onclick="selectRoomFromMenu('Suite')">Pilih Kamar Ini</button>
+            </div>
+        </div>
+    </section>
 
-        <section class="category">
-            <button class="category-btn active" data-category="Semua">
-                Semua
-            </button>
+    <!-- AREA PEMESANAN & KETERSEDIAAN -->
+    <div class="grid" id="bookingSection">
+        <!-- FORM PEMESANAN -->
+        <div class="card">
+            <h2>Form Pemesanan Kamar</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="guestName">Nama Lengkap Tamu</label>
+                    <input type="text" id="guestName" required placeholder="Masukkan nama lengkap Anda">
+                </div>
 
-            <button class="category-btn" data-category="Treatment">
-                Treatment
-            </button>
+                <div class="form-group">
+                    <label for="roomType">Tipe Kamar Pilihan</label>
+                    <select id="roomType">
+                        <option value="Standard" data-price="350000">Standard Butterfly — Rp 350.000 / malam</option>
+                        <option value="Deluxe" data-price="650000">Deluxe Monarch — Rp 650.000 / malam</option>
+                        <option value="Suite" data-price="1250000">Royal Butterfly Suite — Rp 1.250.000 / malam</option>
+                    </select>
+                </div>
 
-            <button class="category-btn" data-category="Relaksi">
-                Relaksi
-            </button>
-        </section>
+                <div class="form-group">
+                    <label>Paket Layanan Tambahan</label>
+                    <div class="radio-group">
+                        <label class="radio-card">
+                            <input type="radio" name="package" value="0" checked>
+                            <div><strong>Room Only</strong></div>
+                            <small>+ Rp 0</small>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="package" value="80000">
+                            <div><strong>+ Sarapan</strong></div>
+                            <small>+ Rp 80rb/mlm</small>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="package" value="160000">
+                            <div><strong>Full Board (3x Makan)</strong></div>
+                            <small>+ Rp 160rb/mlm</small>
+                        </label>
+                    </div>
+                </div>
 
-        <section>
-            <h2>Daftar Menu Kami</h2>
-            <div id="menuList" class="menu-list"></div>
-            <p id="emptyMessage" class="empty-message">
-                Menu tidak ditemukan.
-            </p>
-        </section>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="roomNumber">Nomor Kamar Tersedia</label>
+                        <select id="roomNumber"></select>
+                    </div>
 
-    </main>
+                    <div class="form-group">
+                        <label for="nights">Durasi Menginap (Malam)</label>
+                        <input type="number" id="nights" min="1" value="1" required>
+                    </div>
+                </div>
 
-    <footer>
-        <p>© 2026 HotelMenu | Menu Hotel butterfly</p>
-        <p>Dibuat untuk memudahkan pelanggan membaca menu.</p>
-    </footer>
+                <!-- RINCIAN BIAYA -->
+                <div class="price-summary">
+                    <div class="price-row">
+                        <span>Tarif Kamar (<span id="summaryNights">1</span> malam):</span>
+                        <span id="summaryBasePrice">Rp 350.000</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Paket Tambahan:</span>
+                        <span id="summaryPackagePrice">Rp 0</span>
+                    </div>
+                    <div class="price-row discount-row">
+                        <span>Diskon Long-Stay (Min. 3 malam 10%):</span>
+                        <span id="summaryDiscount">- Rp 0</span>
+                    </div>
+                    <div class="price-total">
+                        <span>Total Pembayaran:</span>
+                        <span id="summaryTotal">Rp 350.000</span>
+                    </div>
+                    <div id="promoNote" class="promo-badge">Promo: Menginap minimal 3 malam otomatis diskon 10%!</div>
+                </div>
 
-    <script src="script.js"></script>
+                <button type="submit" class="btn-primary">Konfirmasi Pemesanan Sekarang</button>
+            </form>
+        </div>
+
+        <!-- TABEL KETERSEDIAAN KAMAR -->
+        <div class="card">
+            <h2>Status Ketersediaan Kamar</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No. Kamar</th>
+                        <th>Tipe</th>
+                        <th>Tarif/Malam</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="roomStatusList"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- DAFTAR TAMU MENGINAP -->
+    <div class="card">
+        <h2>Daftar Tamu Menginap — BUTTERFLY HOTEL</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Tamu</th>
+                    <th>Kamar</th>
+                    <th>Paket</th>
+                    <th>Durasi</th>
+                    <th>Total Tagihan</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="guestListTable">
+                <tr><td colspan="6" class="empty-message">Belum ada tamu yang check-in.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
