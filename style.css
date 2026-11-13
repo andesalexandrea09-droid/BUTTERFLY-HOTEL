@@ -77,11 +77,10 @@ header p {
 }
 
 .room-image {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 15px;
+    width: 100%;        /* Lebar mengikuti ukuran kartu */
+    height: 220px;      /* Ubah angka ini untuk mengatur tinggi foto */
+    object-fit: cover;  /* Memotong bagian berlebih agar foto tidak gepeng */
+    border-radius: 8px; /* Membuat sudut foto sedikit melengkung */
 }
 
 .room-cards {
