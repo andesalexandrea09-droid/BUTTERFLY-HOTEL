@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotelMenu - Menu Pilihan Terbaik</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">Hotel Menu</div>
+        <p>Menu menarik,mudah di baca,mudah dipilih</p>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <h1>Selamat Datang Dihotel Buterrfly!!</h1>
+            <p>Temukan Pilihan Treatment Terbaik </p>
+        </section>
+
+        <section class="search-section">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Cari nama treatment atau relaksi..."
+            >
+        </section>
+
+        <section class="category">
+            <button class="category-btn active" data-category="Semua">
+                Semua
+            </button>
+
+            <button class="category-btn" data-category="Treatment">
+                Treatment
+            </button>
+
+            <button class="category-btn" data-category="Relaksi">
+                Relaksi
+            </button>
+        </section>
+
+        <section>
+            <h2>Daftar Menu Kami</h2>
+            <div id="menuList" class="menu-list"></div>
+            <p id="emptyMessage" class="empty-message">
+                Menu tidak ditemukan.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 HotelMenu | Menu Hotel butterfly</p>
+        <p>Dibuat untuk memudahkan pelanggan membaca menu.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
