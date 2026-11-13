@@ -68,6 +68,14 @@ header p {
     color: var(--text-color);
 }
 
+.room-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
 .room-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
