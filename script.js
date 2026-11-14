@@ -1,194 +1,262 @@
-// Data Kamar BUTTERFLY HOTEL
-let rooms = [
-    { number: 101, type: 'Standard', name: 'Standard Butterfly', price: 350000, status: 'Tersedia' },
-    { number: 102, type: 'Standard', name: 'Standard Butterfly', price: 350000, status: 'Tersedia' },
-    { number: 201, type: 'Deluxe', name: 'Deluxe Monarch', price: 650000, status: 'Tersedia' },
-    { number: 202, type: 'Deluxe', name: 'Deluxe Monarch', price: 650000, status: 'Tersedia' },
-    { number: 301, type: 'Suite', name: 'Royal Butterfly Suite', price: 1250000, status: 'Tersedia' }
+const rooms = [
+  { number: "101", type: "Standard", price: 350000 },
+  { number: "102", type: "Standard", price: 350000 },
+  { number: "201", type: "Deluxe", price: 650000 },
+  { number: "202", type: "Deluxe", price: 650000 },
+  { number: "301", type: "Suite", price: 1250000 }
 ];
 
 let activeGuests = [];
 let currentCalculatedTotal = 0;
 
-// Format Angka ke Rupiah
-function formatRupiah(angka) {
-    return 'Rp ' + angka.toLocaleString('id-ID');
+function formatRupiah(number) {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0
+  }).format(number);
 }
 
-// Fungsi memilih kamar langsung dari Kartu Menu di atas
-function selectRoomFromMenu(roomType) {
-    const selectEl = document.getElementById('roomType');
-    selectEl.value = roomType;
-    
-    updateRoomOptions();
-    calculatePrice();
-
-    // Gulir halaman otomatis menuju form pemesanan
-    document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
-    document.getElementById('guestName').focus();
+function getSelectedPackage() {
+  return document.querySelector('input[name="package"]:checked');
 }
 
-// Kalkulator Harga Real-time
 function calculatePrice() {
-    const roomSelect = document.getElementById('roomType');
-    const selectedOption = roomSelect.options[roomSelect.selectedIndex];
-    const basePrice = parseInt(selectedOption.getAttribute('data-price'));
-    
-    const packagePrice = parseInt(document.querySelector('input[name="package"]:checked').value);
-    const nights = Math.max(1, parseInt(document.getElementById('nights').value) || 1);
+  const roomType = document.getElementById("roomType");
+  const nightsInput = document.getElementById("nights");
+  const selectedPackage = getSelectedPackage();
 
-    const totalBase = basePrice * nights;
-    const totalPackage = packagePrice * nights;
-    const subtotal = totalBase + totalPackage;
+  if (!roomType || !nightsInput || !selectedPackage) return;
 
-    // Diskon otomatis 10% jika menginap minimal 3 malam
-    let discount = 0;
-    const promoNote = document.getElementById('promoNote');
-    if (nights >= 3) {
-        discount = subtotal * 0.10;
-        promoNote.textContent = "Selamat! Anda mendapatkan diskon Long-Stay 10%!";
-        promoNote.style.backgroundColor = "#dcfce7";
-        promoNote.style.color = "#166534";
-    } else {
-        promoNote.textContent = "Promo: Menginap minimal 3 malam otomatis diskon 10%!";
-        promoNote.style.backgroundColor = "#fef3c7";
-        promoNote.style.color = "#92400e";
-    }
+  const basePrice = Number(roomType.value) || 0;
+  const nights = Math.max(1, Number(nightsInput.value) || 1);
+  const packagePrice = Number(selectedPackage.value) || 0;
 
-    currentCalculatedTotal = subtotal - discount;
+  const subtotal = (basePrice + packagePrice) * nights;
+  const discount = subtotal >= 1000000 ? subtotal * 0.1 : 0;
+  const total = subtotal - discount;
 
-    document.getElementById('summaryNights').textContent = nights;
-    document.getElementById('summaryBasePrice').textContent = formatRupiah(totalBase);
-    document.getElementById('summaryPackagePrice').textContent = formatRupiah(totalPackage);
-    document.getElementById('summaryDiscount').textContent = '- ' + formatRupiah(discount);
-    document.getElementById('summaryTotal').textContent = formatRupiah(currentCalculatedTotal);
+  currentCalculatedTotal = total;
+
+  document.getElementById("summaryNights").textContent = nights;
+  document.getElementById("summaryBasePrice").textContent =
+    formatRupiah(basePrice);
+  document.getElementById("summaryPackagePrice").textContent =
+    formatRupiah(packagePrice * nights);
+  document.getElementById("summaryDiscount").textContent =
+    formatRupiah(discount);
+  document.getElementById("summaryTotal").textContent =
+    formatRupiah(total);
+
+  const promoNote = document.getElementById("promoNote");
+  if (promoNote) {
+    promoNote.textContent = discount > 0
+      ? "Selamat! Kamu mendapatkan diskon 10%."
+      : "Diskon 10% berlaku untuk total harga minimal Rp1.000.000.";
+  }
 }
 
-// Perbarui daftar nomor kamar yang tersedia sesuai tipe
 function updateRoomOptions() {
-    const selectedType = document.getElementById('roomType').value;
-    const roomSelect = document.getElementById('roomNumber');
-    roomSelect.innerHTML = '';
+  const roomType = document.getElementById("roomType");
+  const roomNumber = document.getElementById("roomNumber");
 
-    const availableRooms = rooms.filter(room => room.status === 'Tersedia' && room.type === selectedType);
+  if (!roomType || !roomNumber) return;
 
-    if (availableRooms.length === 0) {
-        const opt = document.createElement('option');
-        opt.value = '';
-        opt.textContent = `Kamar ${selectedType} Penuh`;
-        roomSelect.appendChild(opt);
-        return;
-    }
+  const selectedType = roomType.options[roomType.selectedIndex].text;
+  const previousRoom = roomNumber.value;
 
-    availableRooms.forEach(room => {
-        const opt = document.createElement('option');
-        opt.value = room.number;
-        opt.textContent = `Kamar ${room.number}`;
-        roomSelect.appendChild(opt);
-    });
+  roomNumber.innerHTML = '<option value="">Pilih nomor kamar</option>';
+
+  const availableRooms = rooms.filter(room =>
+    room.type === selectedType &&
+    !activeGuests.some(guest => guest.roomNumber === room.number)
+  );
+
+  availableRooms.forEach(room => {
+    const option = document.createElement("option");
+    option.value = room.number;
+    option.textContent = `Kamar ${room.number}`;
+    roomNumber.appendChild(option);
+  });
+
+  if (availableRooms.some(room => room.number === previousRoom)) {
+    roomNumber.value = previousRoom;
+  }
+
+  calculatePrice();
+  renderRoomStatus();
 }
 
-// Tampilkan tabel status ketersediaan kamar
 function renderRoomStatus() {
-    const tbody = document.getElementById('roomStatusList');
-    tbody.innerHTML = '';
+  const container = document.getElementById("roomStatusList");
+  if (!container) return;
 
-    rooms.forEach(room => {
-        const tr = document.createElement('tr');
-        const badgeClass = room.status === 'Tersedia' ? 'badge-available' : 'badge-booked';
-        tr.innerHTML = `
-            <td><strong>${room.number}</strong></td>
-            <td>${room.name}</td>
-            <td>${formatRupiah(room.price)}</td>
-            <td><span class="badge ${badgeClass}">${room.status}</span></td>
-        `;
-        tbody.appendChild(tr);
-    });
+  container.innerHTML = "";
+
+  rooms.forEach(room => {
+    const isOccupied = activeGuests.some(
+      guest => guest.roomNumber === room.number
+    );
+
+    const item = document.createElement("div");
+    item.className = isOccupied ? "room-status occupied" : "room-status available";
+    item.textContent = `Kamar ${room.number} (${room.type}) - ${
+      isOccupied ? "Terisi" : "Tersedia"
+    }`;
+
+    container.appendChild(item);
+  });
 }
 
-// Tampilkan tabel tamu yang sedang menginap
 function renderGuestList() {
-    const tbody = document.getElementById('guestListTable');
-    if (activeGuests.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="empty-message">Belum ada tamu yang check-in.</td></tr>`;
-        return;
-    }
+  const table = document.getElementById("guestListTable");
+  if (!table) return;
 
-    tbody.innerHTML = '';
-    activeGuests.forEach((guest, index) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${guest.name}</td>
-            <td>Kamar ${guest.roomNumber} (${guest.roomName})</td>
-            <td>${guest.packageName}</td>
-            <td>${guest.nights} Malam</td>
-            <td><strong>${formatRupiah(guest.totalPrice)}</strong></td>
-            <td><button class="btn-checkout" onclick="checkOut(${index}, ${guest.roomNumber})">Check-Out</button></td>
-        `;
-        tbody.appendChild(tr);
-    });
+  table.innerHTML = "";
+
+  if (activeGuests.length === 0) {
+    table.innerHTML = `
+      <tr>
+        <td colspan="5">Belum ada tamu yang melakukan reservasi.</td>
+      </tr>
+    `;
+    return;
+  }
+
+  activeGuests.forEach((guest, index) => {
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${guest.name}</td>
+      <td>${guest.roomNumber}</td>
+      <td>${guest.nights} malam</td>
+      <td>${formatRupiah(guest.total)}</td>
+    `;
+
+    table.appendChild(row);
+  });
 }
 
-// Proses Check-Out
-function checkOut(index, roomNumber) {
-    const room = rooms.find(r => r.number === roomNumber);
-    if (room) room.status = 'Tersedia';
+function selectRoomFromMenu(roomType) {
+  const roomSelect = document.getElementById("roomType");
+  const bookingSection = document.getElementById("bookingSection");
 
-    activeGuests.splice(index, 1);
-    initApp();
-}
+  if (!roomSelect) return;
 
-// Event Listeners
-document.getElementById('roomType').addEventListener('change', () => {
+  const option = Array.from(roomSelect.options).find(
+    option => option.text.trim() === roomType
+  );
+
+  if (option) {
+    roomSelect.value = option.value;
     updateRoomOptions();
-    calculatePrice();
-});
+  }
 
-document.querySelectorAll('input[name="package"]').forEach(radio => {
-    radio.addEventListener('change', calculatePrice);
-});
+  if (bookingSection) {
+    bookingSection.scrollIntoView({ behavior: "smooth" });
+  }
+}
 
-document.getElementById('nights').addEventListener('input', calculatePrice);
+function checkOut(roomNumber) {
+  const guestIndex = activeGuests.findIndex(
+    guest => guest.roomNumber === roomNumber
+  );
 
-document.getElementById('bookingForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+  if (guestIndex === -1) {
+    alert("Data tamu tidak ditemukan.");
+    return;
+  }
 
-    const name = document.getElementById('guestName').value;
-    const roomType = document.getElementById('roomType').value;
-    const roomNumber = parseInt(document.getElementById('roomNumber').value);
-    const nights = parseInt(document.getElementById('nights').value);
-    
-    const selectedPkgRadio = document.querySelector('input[name="package"]:checked');
-    const packageName = selectedPkgRadio.parentElement.querySelector('strong').textContent;
+  const guestName = activeGuests[guestIndex].name;
 
-    if (!roomNumber || isNaN(roomNumber)) {
-        alert(`Maaf, kamar tipe ${roomType} sedang penuh.`);
-        return;
-    }
+  if (!confirm(`Checkout tamu ${guestName} dari kamar ${roomNumber}?`)) {
+    return;
+  }
 
-    const roomObj = rooms.find(r => r.number === roomNumber);
-    if (roomObj) roomObj.status = 'Terisi';
+  activeGuests.splice(guestIndex, 1);
 
-    activeGuests.push({
-        name,
-        roomName: roomObj.name,
-        roomNumber,
-        packageName,
-        nights,
-        totalPrice: currentCalculatedTotal
-    });
+  renderGuestList();
+  renderRoomStatus();
+  updateRoomOptions();
 
-    this.reset();
-    initApp();
-    alert(`Terima kasih telah memesan di BUTTERFLY HOTEL!\nTamu: ${name}\nKamar: ${roomObj.name} (No. ${roomNumber})\nTotal Tagihan: ${formatRupiah(currentCalculatedTotal)}`);
-});
+  alert(`Checkout kamar ${roomNumber} berhasil.`);
+}
 
-// Jalankan aplikasi pertama kali
 function initApp() {
-    updateRoomOptions();
-    renderRoomStatus();
-    renderGuestList();
+  updateRoomOptions();
+  renderGuestList();
+
+  const form = document.getElementById("bookingForm");
+  if (!form) return;
+
+  form.onsubmit = function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("guestName").value.trim();
+    const roomTypeSelect = document.getElementById("roomType");
+    const roomNumber = document.getElementById("roomNumber").value;
+    const nights = Math.max(
+      1,
+      Number(document.getElementById("nights").value) || 1
+    );
+    const selectedPackage = getSelectedPackage();
+
+    if (!name || !roomNumber || !selectedPackage) {
+      alert("Mohon lengkapi semua data reservasi.");
+      return;
+    }
+
+    const selectedRoom = rooms.find(
+      room => room.number === roomNumber
+    );
+
+    if (!selectedRoom || selectedRoom.type !== roomTypeSelect.options[roomTypeSelect.selectedIndex].text) {
+      alert("Nomor kamar tidak sesuai dengan tipe kamar.");
+      updateRoomOptions();
+      return;
+    }
+
+    if (activeGuests.some(guest => guest.roomNumber === roomNumber)) {
+      alert("Maaf, kamar tersebut sudah terisi.");
+      updateRoomOptions();
+      return;
+    }
+
     calculatePrice();
+
+    const bookingTotal = currentCalculatedTotal;
+
+    const guest = {
+      name,
+      roomNumber,
+      roomType: selectedRoom.type,
+      nights,
+      packageName: selectedPackage.parentElement.querySelector("strong")?.textContent || "Paket",
+      total: bookingTotal
+    };
+
+    activeGuests.push(guest);
+
+    renderGuestList();
+    renderRoomStatus();
+
+    form.reset();
+    updateRoomOptions();
+
+    alert(
+      `Reservasi berhasil!\n\nNama: ${name}\nKamar: ${roomNumber}\nTotal: ${formatRupiah(bookingTotal)}`
+    );
+  };
 }
 
-initApp();
+document.addEventListener("DOMContentLoaded", function() {
+  initApp();
+
+  document.getElementById("roomType")?.addEventListener("change", updateRoomOptions);
+  document.getElementById("nights")?.addEventListener("input", calculatePrice);
+
+  document.querySelectorAll('input[name="package"]').forEach(input => {
+    input.addEventListener("change", calculatePrice);
+  });
+});
