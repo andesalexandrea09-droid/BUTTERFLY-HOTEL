@@ -473,3 +473,54 @@ th {
 .room-card.featured {
     border: 2px solid #d4af37;
 }
+/* Susunan kartu kamar */
+.room-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  align-items: stretch;
+}
+
+/* Kartu kamar */
+.room-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+/* Gambar kamar */
+.room-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Harga */
+.room-price {
+  color: #5420a5;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+/* Fasilitas */
+.room-facilities {
+  line-height: 1.8;
+  color: #555;
+  flex-grow: 1;
+}
+
+/* Tampilan HP */
+@media (max-width: 768px) {
+  .room-container {
+    grid-template-columns: 1fr;
+  }
+}
