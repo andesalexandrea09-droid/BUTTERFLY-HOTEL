@@ -664,3 +664,64 @@ tbody tr:hover {
         </table>
     </div>
 </div>
+
+/* =====================================
+   LAYOUT FORM PEMESANAN HOTEL
+===================================== */
+
+.booking-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.7fr) minmax(300px, 1fr);
+    gap: 20px;
+    align-items: start;
+    width: 100%;
+}
+
+/* KOLOM KIRI: FORM PEMESANAN */
+.booking-form-container {
+    width: 100%;
+    min-width: 0;
+}
+
+/* KOLOM KANAN */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    min-width: 0;
+}
+
+/* STATUS KETERSEDIAAN KAMAR */
+.availability-card {
+    width: 100%;
+    min-width: 0;
+    height: fit-content;
+}
+
+/* DAFTAR TAMU MENGINAP */
+.guest-list-container {
+    width: 100%;
+    min-width: 0;
+    height: fit-content;
+    overflow-x: auto;
+}
+
+/* TABEL AGAR TIDAK MERUSAK LAYOUT */
+.guest-list-container table,
+.availability-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* RESPONSIVE UNTUK HP DAN TABLET */
+@media screen and (max-width: 768px) {
+    .booking-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .booking-form-container,
+    .right-column {
+        width: 100%;
+    }
+}
