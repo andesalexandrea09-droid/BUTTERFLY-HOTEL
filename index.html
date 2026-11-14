@@ -1,424 +1,270 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUTTERFLY HOTEL - Reservasi & Katalog Kamar</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5b21b6">
+  <title>BUTTERFLY HOTEL | Reservasi & Katalog Kamar</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
+  <main class="container">
 
-<div class="container">
-
-    <!-- HEADER -->
-    <header>
-        <div class="logo-badge">BUTTERFLY HOTEL</div>
-        <h1>Kenyamanan Elegan di Setiap Momen</h1>
-        <p>Pilih kamar impian Anda, nikmati fasilitas eksklusif, dan dapatkan penawaran menginap terbaik.</p>
+    <header class="hero">
+      <div class="logo-badge">BUTTERFLY HOTEL</div>
+      <h1>Kenyamanan Elegan di Setiap Momen</h1>
+      <p>Pilih kamar impian Anda, nikmati fasilitas eksklusif, dan dapatkan penawaran menginap terbaik.</p>
     </header>
 
-    <!-- KATALOG KAMAR -->
     <section class="catalog-section">
-
-        <h2 class="section-title">
-            Menu Pilihan Kamar &amp; Fasilitas
-        </h2>
-
-        <div class="room-cards">
-
-            <!-- KAMAR STANDARD -->
-            <article class="room-card">
-
-                <img
-                    src="WhatsApp Image 2026-11-13 at 9.27.31 AM (1) - Copy.jpeg"
-                    alt="Kamar Standard Butterfly"
-                    class="room-image"
-                >
-
-                <div class="room-header">
-                    <h3>Standard Butterfly</h3>
-
-                    <div class="room-price">
-                        Rp 350.000 <span>/ malam</span>
-                    </div>
-                </div>
-
-                <ul class="facilities-list">
-                    <li>1 Kasur Queen Size</li>
-                    <li>AC &amp; Smart TV 32"</li>
-                    <li>Wi-Fi Kecepatan Tinggi</li>
-                    <li>Kamar Mandi Dalam &amp; Water Heater</li>
-                    <li>Pembuat Kopi &amp; Teh Gratis</li>
-                </ul>
-
-                <button
-                    type="button"
-                    class="btn-select"
-                    onclick="selectRoomFromMenu('Standard')"
-                >
-                    Pilih Kamar Ini
-                </button>
-
-            </article>
-
-
-            <!-- KAMAR DELUXE -->
-            <article class="room-card">
-
-                <img
-                    src="WhatsApp Image 2026-11-13 at 9.48.08 AM.jpeg"
-                    alt="Kamar Deluxe Monarch"
-                    class="room-image"
-                >
-
-                <div class="room-header">
-
-                    <span class="room-tag popular">
-                        Paling Populer
-                    </span>
-
-                    <h3>Deluxe Monarch</h3>
-
-                    <div class="room-price">
-                        Rp 650.000 <span>/ malam</span>
-                    </div>
-
-                </div>
-
-                <ul class="facilities-list">
-                    <li>1 Kasur King Size + Sofa Santai</li>
-                    <li>Balkon Pribadi Pemandangan Taman</li>
-                    <li>Smart TV 43" (Netflix &amp; YouTube)</li>
-                    <li>Kulkas Mini &amp; Hair Dryer</li>
-                    <li>Gratis Akses Kolam Renang &amp; Gym</li>
-                </ul>
-
-                <button
-                    type="button"
-                    class="btn-select"
-                    onclick="selectRoomFromMenu('Deluxe')"
-                >
-                    Pilih Kamar Ini
-                </button>
-
-            </article>
-
-
-            <!-- KAMAR ROYAL SUITE -->
-            <article class="room-card">
-
-                <img
-                    src="delux.jpeg"
-                    alt="Royal Butterfly Suite"
-                    class="room-image"
-                >
-
-                <div class="room-header">
-
-                    <span class="room-tag luxury">
-                        Mewah &amp; Luas
-                    </span>
-
-                    <h3>Royal Butterfly Suite</h3>
-
-                    <div class="room-price">
-                        Rp 1.250.000 <span>/ malam</span>
-                    </div>
-
-                </div>
-
-                <ul class="facilities-list">
-                    <li>Ruang Tamu &amp; Ruang Makan Terpisah</li>
-                    <li>Bathtub Jacuzzi Pribadi</li>
-                    <li>Pemandangan Kota 180 Derajat</li>
-                    <li>Gratis Sarapan Prasmanan (2 Orang)</li>
-                    <li>Layanan Antar-Jemput &amp; VIP Lounge</li>
-                </ul>
-
-                <button
-                    type="button"
-                    class="btn-select"
-                    onclick="selectRoomFromMenu('Suite')"
-                >
-                    Pilih Kamar Ini
-                </button>
-
-            </article>
-
-        </div>
-    </section>
-
-
-    <!-- AREA PEMESANAN DAN STATUS KAMAR -->
-    <section class="grid" id="bookingSection">
-
-        <!-- FORM PEMESANAN -->
-        <div class="card">
-
-            <h2>Form Pemesanan Kamar</h2>
-
-            <form id="bookingForm">
-
-                <div class="form-group">
-                    <label for="guestName">
-                        Nama Lengkap Tamu
-                    </label>
-
-                    <input
-                        type="text"
-                        id="guestName"
-                        required
-                        placeholder="Masukkan nama lengkap Anda"
-                    >
-                </div>
-
-
-                <div class="form-group">
-                    <label for="roomType">
-                        Tipe Kamar Pilihan
-                    </label>
-
-                    <select id="roomType">
-
-                        <option value="Standard" data-price="350000">
-                            Standard Butterfly — Rp 350.000 / malam
-                        </option>
-
-                        <option value="Deluxe" data-price="650000">
-                            Deluxe Monarch — Rp 650.000 / malam
-                        </option>
-
-                        <option value="Suite" data-price="1250000">
-                            Royal Butterfly Suite — Rp 1.250.000 / malam
-                        </option>
-
-                    </select>
-                </div>
-
-
-                <!-- PAKET TAMBAHAN -->
-                <div class="form-group">
-
-                    <label>
-                        Paket Layanan Tambahan
-                    </label>
-
-                    <div class="radio-group">
-
-                        <label class="radio-card">
-                            <input
-                                type="radio"
-                                name="package"
-                                value="0"
-                                checked
-                            >
-
-                            <div>
-                                <strong>Room Only</strong>
-                            </div>
-
-                            <small>+ Rp 0</small>
-                        </label>
-
-
-                        <label class="radio-card">
-                            <input
-                                type="radio"
-                                name="package"
-                                value="80000"
-                            >
-
-                            <div>
-                                <strong>+ Sarapan</strong>
-                            </div>
-
-                            <small>+ Rp 80rb/malam</small>
-                        </label>
-
-
-                        <label class="radio-card">
-                            <input
-                                type="radio"
-                                name="package"
-                                value="160000"
-                            >
-
-                            <div>
-                                <strong>Full Board (3x Makan)</strong>
-                            </div>
-
-                            <small>+ Rp 160rb/malam</small>
-                        </label>
-
-                    </div>
-                </div>
-
-
-                <!-- NOMOR KAMAR DAN DURASI -->
-                <div class="form-row">
-
-                    <div class="form-group">
-                        <label for="roomNumber">
-                            Nomor Kamar Tersedia
-                        </label>
-
-                        <select id="roomNumber"></select>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="nights">
-                            Durasi Menginap (Malam)
-                        </label>
-
-                        <input
-                            type="number"
-                            id="nights"
-                            min="1"
-                            value="1"
-                            required
-                        >
-                    </div>
-
-                </div>
-
-
-                <!-- RINCIAN PEMBAYARAN -->
-                <div class="price-summary">
-
-                    <div class="price-row">
-                        <span>
-                            Tarif Kamar (
-                            <span id="summaryNights">1</span>
-                            malam):
-                        </span>
-
-                        <span id="summaryBasePrice">
-                            Rp 350.000
-                        </span>
-                    </div>
-
-
-                    <div class="price-row">
-                        <span>Paket Tambahan:</span>
-
-                        <span id="summaryPackagePrice">
-                            Rp 0
-                        </span>
-                    </div>
-
-
-                    <div class="price-row discount-row">
-                        <span>
-                            Diskon Long-Stay (Min. 3 malam 10%):
-                        </span>
-
-                        <span id="summaryDiscount">
-                            - Rp 0
-                        </span>
-                    </div>
-
-
-                    <div class="price-total">
-                        <span>Total Pembayaran:</span>
-
-                        <span id="summaryTotal">
-                            Rp 350.000
-                        </span>
-                    </div>
-
-
-                    <div id="promoNote" class="promo-badge">
-                        Promo: Menginap minimal 3 malam otomatis diskon 10%!
-                    </div>
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="btn-primary"
-                >
-                    Konfirmasi Pemesanan Sekarang
-                </button>
-
-            </form>
-
-        </div>
-
-
-        <!-- STATUS KETERSEDIAAN KAMAR -->
-        <div class="card">
-
-            <h2>Status Ketersediaan Kamar</h2>
-
-            <div class="table-wrap">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>No. Kamar</th>
-                            <th>Tipe</th>
-                            <th>Tarif/Malam</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="roomStatusList"></tbody>
-
-                </table>
-
+      <h2 class="section-title">Menu Pilihan Kamar &amp; Fasilitas</h2>
+
+      <div class="room-cards">
+
+        <article class="room-card">
+          <img src="WhatsApp Image 2026-11-13 at 9.27.31 AM (1) - Copy.jpeg"
+               alt="Interior kamar Standard Butterfly"
+               class="room-image">
+
+          <div class="room-content">
+            <div class="room-heading">
+              <h3>Standard Butterfly</h3>
+              <p class="room-price">Rp 350.000 <span>/ malam</span></p>
             </div>
 
-        </div>
+            <ul class="facilities-list">
+              <li>1 Kasur Queen Size</li>
+              <li>AC &amp; Smart TV 32 inci</li>
+              <li>Wi-Fi Kecepatan Tinggi</li>
+              <li>Kamar Mandi Dalam &amp; Water Heater</li>
+              <li>Pembuat Kopi &amp; Teh Gratis</li>
+            </ul>
 
+            <button type="button" class="btn-select" data-room="Standard">
+              Pilih Kamar Ini
+            </button>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <img src="WhatsApp Image 2026-11-13 at 9.48.08 AM.jpeg"
+               alt="Interior kamar Deluxe Monarch"
+               class="room-image">
+
+          <div class="room-content">
+            <div class="room-heading">
+              <span class="room-tag popular">Paling Populer</span>
+              <h3>Deluxe Monarch</h3>
+              <p class="room-price">Rp 650.000 <span>/ malam</span></p>
+            </div>
+
+            <ul class="facilities-list">
+              <li>1 Kasur King Size + Sofa Santai</li>
+              <li>Balkon Pribadi Pemandangan Taman</li>
+              <li>Smart TV 43 inci (Netflix &amp; YouTube)</li>
+              <li>Kulkas Mini &amp; Hair Dryer</li>
+              <li>Gratis Akses Kolam Renang &amp; Gym</li>
+            </ul>
+
+            <button type="button" class="btn-select" data-room="Deluxe">
+              Pilih Kamar Ini
+            </button>
+          </div>
+        </article>
+
+        <article class="room-card">
+          <img src="delux.jpeg"
+               alt="Interior Royal Butterfly Suite"
+               class="room-image">
+
+          <div class="room-content">
+            <div class="room-heading">
+              <span class="room-tag luxury">Mewah &amp; Luas</span>
+              <h3>Royal Butterfly Suite</h3>
+              <p class="room-price">Rp 1.250.000 <span>/ malam</span></p>
+            </div>
+
+            <ul class="facilities-list">
+              <li>Ruang Tamu &amp; Ruang Makan Terpisah</li>
+              <li>Bathtub Jacuzzi Pribadi</li>
+              <li>Pemandangan Kota 180 Derajat</li>
+              <li>Gratis Sarapan Prasmanan (2 Orang)</li>
+              <li>Layanan Antar-Jemput &amp; VIP Lounge</li>
+            </ul>
+
+            <button type="button" class="btn-select" data-room="Suite">
+              Pilih Kamar Ini
+            </button>
+          </div>
+        </article>
+
+      </div>
     </section>
 
+    <section class="booking-grid" id="bookingSection">
 
-    <!-- DAFTAR TAMU MENGINAP -->
-    <section class="card guest-list-container">
+      <section class="card">
+        <h2>Form Pemesanan Kamar</h2>
 
-        <h2>
-            Daftar Tamu Menginap — BUTTERFLY HOTEL
-        </h2>
+        <form id="bookingForm">
+
+          <div class="form-group">
+            <label for="guestName">Nama Lengkap Tamu</label>
+            <input type="text" id="guestName" name="guestName"
+                   required maxlength="80" autocomplete="name"
+                   placeholder="Masukkan nama lengkap Anda">
+          </div>
+
+          <div class="form-group">
+            <label for="roomType">Tipe Kamar Pilihan</label>
+            <select id="roomType" name="roomType" required>
+              <option value="Standard" data-price="350000">
+                Standard Butterfly — Rp 350.000 / malam
+              </option>
+              <option value="Deluxe" data-price="650000">
+                Deluxe Monarch — Rp 650.000 / malam
+              </option>
+              <option value="Suite" data-price="1250000">
+                Royal Butterfly Suite — Rp 1.250.000 / malam
+              </option>
+            </select>
+          </div>
+
+          <fieldset class="form-group package-fieldset">
+            <legend>Paket Layanan Tambahan</legend>
+
+            <div class="radio-group">
+
+              <label class="radio-card">
+                <input type="radio" name="package" value="0" checked>
+                <span class="radio-copy">
+                  <strong>Room Only</strong>
+                  <small>+ Rp 0</small>
+                </span>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="package" value="80000">
+                <span class="radio-copy">
+                  <strong>Sarapan</strong>
+                  <small>+ Rp 80.000/malam</small>
+                </span>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="package" value="160000">
+                <span class="radio-copy">
+                  <strong>Full Board</strong>
+                  <small>+ Rp 160.000/malam</small>
+                </span>
+              </label>
+
+            </div>
+          </fieldset>
+
+          <div class="form-row">
+
+            <div class="form-group">
+              <label for="roomNumber">Nomor Kamar Tersedia</label>
+              <select id="roomNumber" name="roomNumber" required></select>
+            </div>
+
+            <div class="form-group">
+              <label for="nights">Durasi Menginap (Malam)</label>
+              <input type="number" id="nights" name="nights"
+                     min="1" max="365" value="1" required>
+            </div>
+
+          </div>
+
+          <div class="price-summary" aria-live="polite">
+
+            <div class="price-row">
+              <span>Tarif Kamar (<span id="summaryNights">1</span> malam):</span>
+              <strong id="summaryBasePrice">Rp 350.000</strong>
+            </div>
+
+            <div class="price-row">
+              <span>Paket Tambahan:</span>
+              <strong id="summaryPackagePrice">Rp 0</strong>
+            </div>
+
+            <div class="price-row discount-row">
+              <span>Diskon Long-Stay (min. 3 malam, 10%):</span>
+              <strong id="summaryDiscount">- Rp 0</strong>
+            </div>
+
+            <div class="price-total">
+              <span>Total Pembayaran:</span>
+              <strong id="summaryTotal">Rp 350.000</strong>
+            </div>
+
+            <p id="promoNote" class="promo-badge">
+              Diskon 10% otomatis berlaku untuk menginap minimal 3 malam.
+            </p>
+
+          </div>
+
+          <button type="submit" class="btn-primary">
+            Konfirmasi Pemesanan Sekarang
+          </button>
+
+        </form>
+      </section>
+
+      <section class="card availability-card">
+        <h2>Status Ketersediaan Kamar</h2>
 
         <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>No. Kamar</th>
+                <th>Tipe</th>
+                <th>Tarif/Malam</th>
+                <th>Status</th>
+              </tr>
+            </thead>
 
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>Nama Tamu</th>
-                        <th>Kamar</th>
-                        <th>Paket</th>
-                        <th>Durasi</th>
-                        <th>Total Tagihan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-
-                <tbody id="guestListTable">
-
-                    <tr>
-                        <td colspan="6" class="empty-message">
-                            Belum ada tamu yang check-in.
-                        </td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
+            <tbody id="roomStatusList"></tbody>
+          </table>
         </div>
+      </section>
 
     </section>
 
-</div>
+    <section class="card guest-list-container">
+      <h2>Daftar Tamu Menginap — BUTTERFLY HOTEL</h2>
 
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Nama Tamu</th>
+              <th>Kamar</th>
+              <th>Paket</th>
+              <th>Durasi</th>
+              <th>Total Tagihan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
 
-<!-- JAVASCRIPT -->
-<script src="script.js"></script>
+          <tbody id="guestListTable">
+            <tr>
+              <td colspan="6" class="empty-message">
+                Belum ada tamu yang melakukan reservasi.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
+    <footer class="site-footer">
+      © <span id="currentYear"></span> BUTTERFLY HOTEL. Seluruh hak cipta dilindungi.
+    </footer>
+
+  </main>
 </body>
 </html>
