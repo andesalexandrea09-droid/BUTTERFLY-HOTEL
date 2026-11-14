@@ -391,3 +391,17 @@ th {
     background-color: #fee2e2; 
     color: #991b1b; 
 }
+/* Ukuran kartu Deluxe Monarch */
+.room-card.featured {
+    grid-column: auto !important;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.room-card.featured .room-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+}
