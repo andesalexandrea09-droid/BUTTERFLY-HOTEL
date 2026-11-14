@@ -408,3 +408,68 @@ th {
     object-fit: cover;
     border-radius: 10px;
 }
+.guest-list-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.guest-list-container table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+}
+
+.guest-list-container th,
+.guest-list-container td {
+    white-space: nowrap;
+    padding: 12px;
+    text-align: center;
+}
+.room-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.room-card {
+    border-radius: 12px;
+    padding: 15px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.room-card.featured {
+    border: 2px solid #d4af37;
+}
+.room-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.room-card {
+    border-radius: 12px;
+    padding: 15px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.room-card.featured {
+    border: 2px solid #d4af37;
+}
+.room-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.room-card {
+    border-radius: 12px;
+    padding: 15px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.room-card.featured {
+    border: 2px solid #d4af37;
+}
