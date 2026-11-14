@@ -1,13 +1,21 @@
+/* ==========================================
+   BUTTERFLY HOTEL - MAIN STYLESHEET
+========================================== */
+
 :root {
-    --primary: #6d28d9;       /* Ungu Elegan Butterfly */
+    --primary: #6d28d9;
     --primary-hover: #5b21b6;
-    --accent: #f59e0b;        /* Emas Hangat */
+    --accent: #f59e0b;
     --success: #16a34a;
     --danger: #dc2626;
     --bg-color: #f5f3ff;
     --card-bg: #ffffff;
     --text-color: #1e1b4b;
     --border-color: #ddd6fe;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -20,10 +28,14 @@ body {
 
 .container {
     max-width: 1120px;
+    width: 100%;
     margin: 0 auto;
 }
 
-/* HEADER */
+/* ==========================================
+   HEADER
+========================================== */
+
 header {
     text-align: center;
     background: linear-gradient(135deg, #4c1d95, #7c3aed);
@@ -31,12 +43,12 @@ header {
     padding: 35px 20px;
     border-radius: 16px;
     margin-bottom: 30px;
-    box-shadow: 0 10px 15px -3px rgb(109 40 217 / 0.2);
+    box-shadow: 0 10px 15px -3px rgb(109 40 217 / 20%);
 }
 
 .logo-badge {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.15);
     padding: 6px 16px;
     border-radius: 50px;
     font-weight: 700;
@@ -56,7 +68,10 @@ header p {
     font-size: 1rem;
 }
 
-/* KATALOG MENU KAMAR */
+/* ==========================================
+   KATALOG KAMAR
+========================================== */
+
 .catalog-section {
     margin-bottom: 35px;
 }
@@ -68,60 +83,87 @@ header p {
     color: var(--text-color);
 }
 
-.room-image {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-.room-card button {
-    width: 100%;
-    margin-top: auto;
-    padding: 12px;
-    border-radius: 10px;
-}
-.room-cards {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+/* Container kartu kamar.
+   Mendukung kedua nama class HTML. */
+
+.room-cards,
+.room-container {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     gap: 20px;
     width: 100%;
+    max-width: 1120px;
+    margin: 0 auto 30px;
+    padding: 10px;
     align-items: stretch;
-    padding:20px
 }
 
-@media (max-width: 850px) {
-    .room-cards {
-        grid-template-columns: 1fr;
-    }
-}
-.room-card {
+/* Semua kartu memiliki ukuran seragam */
+
+.room-cards > .room-card,
+.room-container > .room-card {
+    grid-column: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 560px;
+    height: 100%;
+    padding: 18px;
     background: var(--card-bg);
-    border-radius: 14px;
-    padding: 22px;
     border: 1px solid var(--border-color);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.07);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.2s, box-shadow 0.2s; 
+    justify-content: flex-start;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
+
+/* Efek hover */
 
 .room-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 20px -5px rgb(109 40 217 / 0.15);
+    box-shadow: 0 12px 20px -5px rgb(109 40 217 / 15%);
 }
 
+/* Kartu unggulan tetap sama besar */
+
 .room-card.featured {
+    grid-column: auto !important;
+    width: 100% !important;
+    max-width: none !important;
     border: 2px solid var(--primary);
     position: relative;
 }
 
-.room-card.featured .room-image {
-    width: 100%;
-    height: 220px;
+/* Gambar kamar seragam */
+
+.room-cards .room-image,
+.room-container .room-image,
+.room-cards .room-card img,
+.room-container .room-card img {
+    display: block;
+    width: 100% !important;
+    height: 180px !important;
+    min-height: 180px;
+    max-height: 180px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 10px;
 }
+
+/* Judul kamar */
+
+.room-header h3,
+.room-card h3 {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin: 10px 0;
+    min-height: 45px;
+}
+
+/* Label kamar */
+
 .room-tag {
     display: inline-block;
     font-size: 0.75rem;
@@ -143,18 +185,16 @@ header p {
     color: #86198f;
 }
 
-.room-header h3 {
-    margin: 5px 0;
-    font-size: 1.35rem;
-}
+/* Harga kamar */
 
 .room-price {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 800;
     color: var(--primary);
     margin: 10px 0 15px;
     padding-bottom: 12px;
     border-bottom: 1px dashed var(--border-color);
+    line-height: 1.5;
 }
 
 .room-price span {
@@ -163,53 +203,59 @@ header p {
     color: #64748b;
 }
 
+/* Daftar fasilitas */
+
 .facilities-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 20px 0;
-    font-size: 0.92rem;
+    margin: 0 0 20px;
+    font-size: 0.9rem;
+    flex-grow: 1;
 }
 
 .facilities-list li {
     padding: 6px 0;
     color: #334155;
+    line-height: 1.5;
 }
 
+/* Tombol pilih kamar */
+
+.room-card button,
 .btn-select {
+    width: 100%;
+    margin-top: auto;
+    padding: 12px;
+    border-radius: 10px;
     background-color: #ede9fe;
     color: var(--primary);
     border: 1px solid var(--primary);
-    padding: 10px;
-    border-radius: 8px;
     font-weight: 700;
     cursor: pointer;
-    width: 100%;
     transition: all 0.2s;
 }
 
-.btn-select:hover {
+.btn-select:hover,
+.room-card button:hover {
     background-color: var(--primary);
     color: white;
 }
 
-/* GRID & FORM */
+/* ==========================================
+   FORM DAN STATUS KAMAR
+========================================== */
+
 .grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     gap: 20px;
 }
 
-@media (max-width: 768px) {
-    .grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 .card {
     background: var(--card-bg);
     padding: 22px;
     border-radius: 14px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 5%);
     border: 1px solid var(--border-color);
     margin-bottom: 20px;
 }
@@ -238,19 +284,22 @@ label {
     font-size: 0.9rem;
 }
 
-input, select {
+input,
+select {
     width: 100%;
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    box-sizing: border-box;
     font-size: 0.95rem;
     outline: none;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
     border-color: var(--primary);
 }
+
+/* Pilihan paket */
 
 .radio-group {
     display: flex;
@@ -277,6 +326,8 @@ input:focus, select:focus {
     border-color: var(--primary);
     background-color: #f5f3ff;
 }
+
+/* Ringkasan harga */
 
 .price-summary {
     background-color: #f5f3ff;
@@ -320,6 +371,8 @@ input:focus, select:focus {
     margin-top: 8px;
 }
 
+/* Tombol utama */
+
 .btn-primary {
     background-color: var(--primary);
     color: white;
@@ -352,6 +405,10 @@ input:focus, select:focus {
     background-color: #b91c1c;
 }
 
+/* ==========================================
+   TABEL STATUS KAMAR
+========================================== */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -359,7 +416,8 @@ table {
     font-size: 0.9rem;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
@@ -381,29 +439,20 @@ th {
     font-weight: 600;
 }
 
-.badge-available { 
-    background-color: #dcfce7; 
-    color: #166534; 
+.badge-available {
+    background-color: #dcfce7;
+    color: #166534;
 }
 
-.badge-booked { 
-    background-color: #fee2e2; 
-    color: #991b1b; 
-}
-/* Ukuran kartu Deluxe Monarch */
-.room-card.featured {
-    grid-column: auto !important;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+.badge-booked {
+    background-color: #fee2e2;
+    color: #991b1b;
 }
 
-.room-card.featured .room-image {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 10px;
-}
+/* ==========================================
+   DAFTAR TAMU
+========================================== */
+
 .guest-list-container {
     width: 100%;
     overflow-x: auto;
@@ -421,188 +470,57 @@ th {
     padding: 12px;
     text-align: center;
 }
-.room-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
 
-.room-card {
-    border-radius: 12px;
-    padding: 15px;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+/* ==========================================
+   RESPONSIVE TABLET
+========================================== */
 
-.room-card.featured {
-    border: 2px solid #d4af37;
-}
-.room-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.room-card {
-    border-radius: 12px;
-    padding: 15px;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.room-card.featured {
-    border: 2px solid #d4af37;
-}
-.room-cards {
-    display: grid;
-    grid-template-columns: repeat(3, minmax 1fr));
-    gap: 20px;
-    width: 100%
-    align-items: stretch;
-}
-
-.room-card {
-    border-radius: 12px;
-    padding: 15px;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.room-card.featured {
-    border: 2px solid #d4af37;
-}
-/* Susunan kartu kamar */
-.room-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 20px;
-  align-items: stretch;
-}
-
-/* Kartu kamar */
-.room-card {
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.10);
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-}
-
-/* Gambar kamar */
-.room-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-/* Harga */
-.room-price {
-  color: #5420a5;
-  font-size: 22px;
-  font-weight: bold;
-  margin: 12px 0;
-}
-
-/* Fasilitas */
-.room-facilities {
-  line-height: 1.8;
-  color: #555;
-  flex-grow: 1;
-}
-
-/* Tampilan HP */
-@media (max-width: 768px) {
-  .room-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* =================================
-   PERBAIKAN UKURAN KARTU KAMAR
-   BUTTERFLY HOTEL
-================================= */
-
-.room-cards {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 10px;
-    box-sizing: border-box;
-    align-items: stretch;
-}
-
-/* Semua kartu memiliki ukuran sama */
-.room-cards > .room-card {
-    width: 100% !important;
-    min-width: 0;
-    max-width: 100% !important;
-    min-height: 560px;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-/* Kartu unggulan tidak boleh melebar */
-.room-cards > .room-card.featured {
-    grid-column: span 1 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-/* Ukuran gambar disamakan */
-.room-cards .room-card img,
-.room-cards .room-image {
-    width: 100%;
-    height: 180px;
-    min-height: 180px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-/* Judul kamar */
-.room-cards .room-card h3 {
-    font-size: 1.15rem;
-    min-height: 45px;
-}
-
-/* Harga kamar */
-.room-cards .room-price {
-    font-size: 1.2rem;
-}
-
-/* Fasilitas */
-.room-cards .facilities-list {
-    flex-grow: 1;
-}
-
-/* Tombol selalu di bagian bawah */
-.room-cards .room-card button {
-    width: 100%;
-    margin-top: auto;
-}
-
-/* Tampilan tablet */
 @media (max-width: 850px) {
-    .room-cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .room-cards,
+    .room-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
     }
 }
 
-/* Tampilan HP */
+/* ==========================================
+   RESPONSIVE HP
+========================================== */
+
 @media (max-width: 600px) {
-    .room-cards {
+
+    body {
+        padding: 10px;
+    }
+
+    .room-cards,
+    .room-container {
+        grid-template-columns: 1fr !important;
+        padding: 5px;
+    }
+
+    .room-cards > .room-card,
+    .room-container > .room-card {
+        min-height: 520px;
+    }
+
+    .grid {
         grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 15px;
     }
 }
