@@ -76,16 +76,19 @@ header p {
     margin-bottom: 15px;
 }
 
-.room-image {
-    width: 100%;        /* Lebar mengikuti ukuran kartu */
-    height: 220px;      /* Ubah angka ini untuk mengatur tinggi foto */
-    object-fit: cover;  /* Memotong bagian berlebih agar foto tidak gepeng */
-    border-radius: 8px; /* Membuat sudut foto sedikit melengkung */
-}
-
 .room-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+@media (max-width: 850px) {
+    .room-cards {
+        grid-template-columns: 1fr;
+
+}
+.room-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
 }
 
@@ -93,8 +96,8 @@ header p {
     .room-cards {
         grid-template-columns: 1fr;
     }
+}    
 }
-
 .room-card {
     background: var(--card-bg);
     border-radius: 14px;
