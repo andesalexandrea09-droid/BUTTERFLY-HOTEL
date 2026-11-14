@@ -1,129 +1,135 @@
 /* ==========================================
-   BUTTERFLY HOTEL
-   MAIN STYLESHEET
+   BUTTERFLY HOTEL - MAIN STYLESHEET
 ========================================== */
 
-/* RESET */
+:root {
+    --primary: #6d28d9;
+    --primary-dark: #5b21b6;
+    --accent: #f59e0b;
+    --success: #15803d;
+    --danger: #b91c1c;
+    --page-bg: #f5f3ff;
+    --card-bg: #ffffff;
+    --text: #211b3b;
+    --muted: #64748b;
+    --border: #e5defa;
+    --shadow: 0 8px 24px rgba(48, 25, 91, 0.08);
+}
+
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
-/* WARNA UTAMA */
-:root {
-    --primary: #6d28d9;
-    --primary-hover: #5b21b6;
-    --accent: #f59e0b;
-    --success: #16a34a;
-    --danger: #dc2626;
-    --bg-color: #f5f3ff;
-    --card-bg: #ffffff;
-    --text-color: #1e1b4b;
-    --border-color: #ddd6fe;
+html {
+    scroll-behavior: smooth;
 }
 
-/* BODY */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    padding: 20px;
-    line-height: 1.6;
+    margin: 0;
+    padding: 28px 18px;
+    color: var(--text);
+    background: var(--page-bg);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.55;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid rgba(109, 40, 217, 0.25);
+    outline-offset: 2px;
 }
 
 .container {
-    width: 100%;
-    max-width: 1120px;
+    width: min(1180px, 100%);
     margin: 0 auto;
 }
-
 
 /* ==========================================
    HEADER
 ========================================== */
 
-header {
+.hero {
+    padding: 42px 24px;
+    margin-bottom: 34px;
+    color: #fff;
     text-align: center;
-    background: linear-gradient(135deg, #4c1d95, #7c3aed);
-    color: white;
-    padding: 35px 20px;
-    border-radius: 16px;
-    margin-bottom: 30px;
-    box-shadow: 0 10px 15px -3px rgb(109 40 217 / 20%);
+    border-radius: 20px;
+    background: linear-gradient(
+        135deg,
+        #3b176f,
+        #6d28d9 60%,
+        #8b5cf6
+    );
+    box-shadow: 0 14px 32px rgba(91, 33, 182, 0.2);
 }
 
 .logo-badge {
     display: inline-block;
-    background: rgba(255,255,255,0.15);
-    padding: 6px 16px;
-    border-radius: 50px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-    font-size: 0.95rem;
+    padding: 7px 17px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 999px;
+    background: rgba(255,255,255,.14);
+    font-size: .88rem;
+    font-weight: 800;
+    letter-spacing: 1.4px;
 }
 
-header h1 {
-    margin: 5px 0 10px;
-    font-size: 2rem;
-    line-height: 1.3;
+.hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(1.65rem, 4vw, 2.45rem);
+    line-height: 1.2;
 }
 
-header p {
-    opacity: 0.9;
-    font-size: 1rem;
+.hero p {
+    max-width: 720px;
+    margin: 0 auto;
+    color: rgba(255,255,255,.9);
 }
-
 
 /* ==========================================
    KATALOG KAMAR
 ========================================== */
 
 .catalog-section {
-    margin-bottom: 35px;
+    margin-bottom: 34px;
 }
 
 .section-title {
+    margin: 0 0 20px;
     text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 25px;
-    color: var(--text-color);
+    font-size: 1.55rem;
 }
-
-/* GRID KARTU KAMAR */
 
 .room-cards {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-    width: 100%;
     align-items: stretch;
+    gap: 22px;
 }
 
-/* KARTU KAMAR */
-
 .room-card {
-    width: 100%;
-    min-width: 0;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 14px;
-    padding: 18px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.07);
-
     display: flex;
+    min-width: 0;
     flex-direction: column;
-
-    height: 100%;
-    min-height: 560px;
-
-    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .room-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 20px -5px rgb(109 40 217 / 15%);
+    box-shadow: 0 14px 30px rgba(48,25,91,.13);
 }
 
 /* GAMBAR KAMAR */
@@ -131,292 +137,327 @@ header p {
 .room-image {
     display: block;
     width: 100%;
-    height: 190px;
-    min-height: 190px;
+    height: 205px;
+    flex: 0 0 205px;
     object-fit: cover;
-    object-position: center;
-    border-radius: 10px;
-    margin-bottom: 12px;
+    background: #ede9fe;
 }
 
-/* HEADER KARTU */
-
-.room-header {
-    width: 100%;
+.room-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px;
 }
 
-.room-header h3,
-.room-card h3 {
-    font-size: 1.15rem;
-    line-height: 1.4;
-    margin: 10px 0;
-    min-height: 50px;
+/* JUDUL KAMAR */
+
+.room-heading {
+    min-height: 112px;
+}
+
+.room-heading h3 {
+    min-height: 54px;
+    margin: 8px 0 4px;
+    font-size: 1.18rem;
+    line-height: 1.35;
+}
+
+/* HARGA KAMAR */
+
+.room-price {
+    margin: 8px 0 13px;
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.room-price span {
+    color: var(--muted);
+    font-size: .86rem;
+    font-weight: 500;
 }
 
 /* LABEL KAMAR */
 
 .room-tag {
     display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 700;
     padding: 4px 10px;
-    border-radius: 20px;
+    border-radius: 999px;
+    color: var(--primary-dark);
     background: #ede9fe;
-    color: var(--primary);
-    margin-bottom: 8px;
+    font-size: .75rem;
+    font-weight: 800;
 }
 
 .room-tag.popular {
+    color: #92400e;
     background: #fef3c7;
-    color: #b45309;
 }
 
 .room-tag.luxury {
-    background: #fae8ff;
     color: #86198f;
-}
-
-/* HARGA KAMAR */
-
-.room-price {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--primary);
-    margin: 10px 0 15px;
-    padding-bottom: 12px;
-    border-bottom: 1px dashed var(--border-color);
-    line-height: 1.5;
-}
-
-.room-price span {
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: #64748b;
+    background: #fae8ff;
 }
 
 /* FASILITAS */
 
 .facilities-list {
-    list-style: none;
+    flex: 1;
+    margin: 0 0 22px;
     padding: 0;
-    margin: 0 0 20px;
-    font-size: 0.9rem;
-    flex-grow: 1;
+    list-style: none;
 }
 
 .facilities-list li {
-    padding: 6px 0;
-    color: #334155;
-    line-height: 1.5;
+    position: relative;
+    padding: 7px 0 7px 22px;
+    color: #475569;
+    font-size: .9rem;
+    border-bottom: 1px solid #f1edfa;
 }
 
-/* TOMBOL KARTU */
+.facilities-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: 800;
+}
+
+/* TOMBOL PILIH KAMAR */
+
+.btn-select,
+.btn-primary,
+.btn-checkout {
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 750;
+    transition: background .2s ease, transform .2s ease;
+}
 
 .btn-select {
     width: 100%;
     margin-top: auto;
-    padding: 12px;
-    border-radius: 10px;
-    background-color: #ede9fe;
-    color: var(--primary);
+    padding: 12px 15px;
     border: 1px solid var(--primary);
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
+    color: var(--primary);
+    background: #f5f3ff;
 }
 
 .btn-select:hover {
-    background-color: var(--primary);
-    color: white;
+    color: #fff;
+    background: var(--primary);
 }
 
-
 /* ==========================================
-   FORM PEMESANAN DAN STATUS KAMAR
+   FORM PEMESANAN & STATUS KAMAR
 ========================================== */
 
-.grid {
+.booking-grid {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 20px;
+    grid-template-columns: minmax(0, 1.2fr) minmax(330px, .8fr);
     align-items: start;
+    gap: 22px;
+    margin-bottom: 22px;
+    scroll-margin-top: 20px;
 }
 
 .card {
+    min-width: 0;
+    padding: 24px;
+    margin-bottom: 22px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
     background: var(--card-bg);
-    padding: 22px;
-    border-radius: 14px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 5%);
-    border: 1px solid var(--border-color);
-    margin-bottom: 20px;
+    box-shadow: var(--shadow);
 }
 
 .card h2 {
-    margin-top: 0;
-    font-size: 1.2rem;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 1.22rem;
 }
 
-/* FORM */
+/* INPUT FORM */
 
 .form-group {
-    margin-bottom: 15px;
+    min-width: 0;
+    margin-bottom: 17px;
 }
 
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-label {
+.form-group > label,
+.package-fieldset legend {
     display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-    font-size: 0.9rem;
+    margin-bottom: 7px;
+    font-size: .91rem;
+    font-weight: 700;
 }
 
-input,
+input[type="text"],
+input[type="number"],
 select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 0.95rem;
-    outline: none;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #d8cfee;
+    border-radius: 9px;
+    color: var(--text);
+    background: #fff;
 }
 
 input:focus,
 select:focus {
     border-color: var(--primary);
+    outline: 3px solid rgba(109,40,217,.1);
 }
 
+/* PAKET TAMBAHAN */
 
-/* ==========================================
-   PILIHAN PAKET
-========================================== */
+.package-fieldset {
+    padding: 0;
+    border: 0;
+}
+
+.package-fieldset legend {
+    padding: 0;
+}
 
 .radio-group {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
 }
 
 .radio-card {
-    flex: 1;
+    display: flex;
     min-width: 0;
-    border: 1px solid var(--border-color);
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
+    min-height: 104px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 8px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
     text-align: center;
-    transition: all 0.2s;
+    cursor: pointer;
+    background: #fff;
+}
+
+.radio-card:has(input:checked) {
+    border-color: var(--primary);
+    background: #f5f3ff;
+    box-shadow: inset 0 0 0 1px var(--primary);
 }
 
 .radio-card input {
     width: auto;
-    margin-bottom: 5px;
+    margin: 0;
+    accent-color: var(--primary);
 }
 
-.radio-card:hover {
-    border-color: var(--primary);
-    background-color: #f5f3ff;
+.radio-copy {
+    display: grid;
+    gap: 4px;
 }
 
-.radio-card small {
-    font-size: 0.75rem;
+.radio-copy strong {
+    font-size: .88rem;
 }
 
+.radio-copy small {
+    color: var(--muted);
+    font-size: .77rem;
+}
+
+/* BARIS FORM */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
 
 /* ==========================================
-   RINGKASAN HARGA
+   RINCIAN PEMBAYARAN
 ========================================== */
 
 .price-summary {
-    background-color: #f5f3ff;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    padding: 16px;
+    margin: 4px 0 17px;
     border-left: 4px solid var(--primary);
+    border-radius: 10px;
+    background: #f7f5ff;
+}
+
+.price-row,
+.price-total {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
 }
 
 .price-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 6px;
-    font-size: 0.9rem;
+    margin-bottom: 9px;
+    font-size: .88rem;
+}
+
+.price-row strong {
+    white-space: nowrap;
 }
 
 .discount-row {
     color: var(--success);
-    font-weight: 600;
 }
 
 .price-total {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    font-weight: 800;
-    font-size: 1.15rem;
-    color: var(--primary);
+    padding-top: 12px;
+    margin-top: 12px;
     border-top: 1px dashed #c4b5fd;
-    padding-top: 8px;
-    margin-top: 8px;
+    color: var(--primary-dark);
+    font-size: 1.12rem;
+    font-weight: 850;
+}
+
+.price-total strong {
+    white-space: nowrap;
 }
 
 .promo-badge {
-    background-color: #fef3c7;
-    color: #92400e;
-    font-size: 0.8rem;
-    padding: 6px 10px;
-    border-radius: 4px;
-    font-weight: 600;
     display: inline-block;
-    margin-top: 8px;
+    padding: 6px 10px;
+    margin: 12px 0 0;
+    border-radius: 6px;
+    color: #92400e;
+    background: #fef3c7;
+    font-size: .78rem;
+    font-weight: 650;
 }
 
+.promo-badge.active {
+    color: #166534;
+    background: #dcfce7;
+}
 
-/* ==========================================
-   TOMBOL UTAMA
-========================================== */
+/* TOMBOL KONFIRMASI */
 
 .btn-primary {
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    padding: 12px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 700;
     width: 100%;
+    padding: 14px 16px;
+    color: #fff;
+    background: var(--primary);
     font-size: 1rem;
-    transition: background-color 0.2s;
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-hover);
+    background: var(--primary-dark);
 }
-
-.btn-checkout {
-    background-color: var(--danger);
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.btn-checkout:hover {
-    background-color: #b91c1c;
-}
-
 
 /* ==========================================
-   TABEL
+   TABEL KETERSEDIAAN DAN TAMU
 ========================================== */
 
 .table-wrap {
@@ -427,153 +468,171 @@ select:focus {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
-    font-size: 0.9rem;
+    font-size: .87rem;
 }
 
 th,
 td {
-    padding: 10px;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--border);
     text-align: left;
-    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
 }
 
 th {
-    background-color: #f5f3ff;
+    color: #43336b;
+    background: #f5f3ff;
+    font-weight: 750;
 }
 
-.empty-message {
-    text-align: center;
-    color: #64748b;
+tbody tr:hover {
+    background: #fcfbff;
 }
 
 /* STATUS KAMAR */
 
 .badge {
+    display: inline-block;
     padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 750;
+    white-space: nowrap;
 }
 
 .badge-available {
-    background-color: #dcfce7;
     color: #166534;
+    background: #dcfce7;
 }
 
 .badge-booked {
-    background-color: #fee2e2;
     color: #991b1b;
+    background: #fee2e2;
 }
 
+/* DAFTAR TAMU */
 
-/* ==========================================
-   DAFTAR TAMU
-========================================== */
+.empty-message {
+    padding: 24px 10px;
+    color: var(--muted);
+    text-align: center;
+}
 
 .guest-list-container {
-    width: 100%;
-    overflow: hidden;
-}
-
-.guest-list-container .table-wrap {
-    overflow-x: auto;
+    margin-top: 2px;
 }
 
 .guest-list-container table {
-    min-width: 650px;
+    min-width: 700px;
 }
 
 .guest-list-container th,
 .guest-list-container td {
-    white-space: nowrap;
-    padding: 12px;
     text-align: center;
 }
 
+/* TOMBOL CHECK-OUT */
+
+.btn-checkout {
+    padding: 7px 11px;
+    color: #fff;
+    background: var(--danger);
+    font-size: .78rem;
+}
+
+.btn-checkout:hover {
+    background: #991b1b;
+}
+
+/* FOOTER */
+
+.site-footer {
+    padding: 10px 0 4px;
+    color: var(--muted);
+    text-align: center;
+    font-size: .82rem;
+}
 
 /* ==========================================
-   TABLET
+   RESPONSIVE TABLET
 ========================================== */
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
 
     .room-cards {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .grid {
+    .booking-grid {
         grid-template-columns: 1fr;
     }
 
 }
 
-
 /* ==========================================
-   HP
+   RESPONSIVE HP
 ========================================== */
 
 @media (max-width: 600px) {
 
     body {
-        padding: 10px;
+        padding: 14px 10px;
     }
 
-    header {
-        padding: 25px 15px;
-    }
-
-    header h1 {
-        font-size: 1.5rem;
-    }
-
-    header p {
-        font-size: 0.9rem;
+    .hero {
+        padding: 32px 18px;
+        border-radius: 15px;
     }
 
     .room-cards {
         grid-template-columns: 1fr;
-        gap: 18px;
-    }
-
-    .room-card {
-        min-height: 0;
-        height: auto;
+        gap: 16px;
     }
 
     .room-image {
-        height: 210px;
-        min-height: 210px;
+        height: 220px;
+        flex-basis: 220px;
     }
 
-    .room-header h3,
-    .room-card h3 {
+    .room-heading {
         min-height: 0;
     }
 
-    .grid {
-        grid-template-columns: 1fr;
+    .room-heading h3 {
+        min-height: 0;
+    }
+
+    .card {
+        padding: 17px;
     }
 
     .form-row {
         grid-template-columns: 1fr;
+        gap: 0;
     }
 
     .radio-group {
-        flex-direction: column;
+        grid-template-columns: 1fr;
     }
 
-    .card {
-        padding: 15px;
+    .radio-card {
+        min-height: 68px;
+        justify-content: flex-start;
+        text-align: left;
+        padding: 12px;
     }
 
     .price-row,
     .price-total {
-        font-size: 0.85rem;
+        font-size: .84rem;
+    }
+
+    .price-total {
+        font-size: 1rem;
     }
 
     .section-title {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
     }
 
 }
