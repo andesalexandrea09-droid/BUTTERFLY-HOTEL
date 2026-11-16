@@ -253,16 +253,19 @@ function checkOut(guestId) {
     alert("Check-out berhasil!");
 }
 
-
 // ==========================================
-// 9. PROSES PEMESANAN KAMAR
+// 9. PROSES PEMESANAN KAMAR VIA WHATSAPP
 // ==========================================
 
 const bookingForm = document.getElementById("bookingForm");
 
 if (bookingForm) {
     bookingForm.addEventListener("submit", function(event) {
+
         event.preventDefault();
+
+        // NOMOR WHATSAPP HOTEL
+        const nomorHotel = "6281335342783";
 
         const guestName = document.getElementById("guestName").value.trim();
         const roomType = document.getElementById("roomType").value;
@@ -291,11 +294,34 @@ if (bookingForm) {
         }
 
         const packageName = selectedPackage
-            .closest("label")
-            ?.querySelector("strong")?.textContent || "Paket";
+            .closest(".radio-card")
+            .querySelector("strong").textContent;
 
+        // Hitung total pembayaran
         calculatePrice();
 
+        const total = currentCalculatedTotal;
+
+        // Buat pesan WhatsApp
+        const pesan =
+`Halo BUTTERFLY HOTEL, saya ingin memesan kamar.
+
+Nama Tamu: ${guestName}
+Tipe Kamar: ${room.name}
+Nomor Kamar: ${roomNumber}
+Paket Layanan: ${packageName}
+Durasi Menginap: ${nights} malam
+
+Total Pembayaran: ${formatRupiah(total)}
+
+Mohon konfirmasi pemesanan saya.
+Terima kasih.`;
+
+        const linkWhatsApp =
+            "https://wa.me/" + nomorHotel +
+            "?text=" + encodeURIComponent(pesan);
+
+        // Simpan pemesanan di website
         room.status = "Terisi";
 
         activeGuests.push({
@@ -305,26 +331,31 @@ if (bookingForm) {
             roomName: room.name,
             packageName: packageName,
             nights: nights,
-            totalPrice: currentCalculatedTotal
+            totalPrice: total
         });
 
+        // Perbarui tampilan
         renderRoomStatus();
         renderGuestList();
 
+        // Buka WhatsApp
+        const whatsappWindow = window.open(
+            linkWhatsApp,
+            "_blank"
+        );
+
+        if (!whatsappWindow) {
+            window.location.href = linkWhatsApp;
+        }
+
+        // Kosongkan form
         bookingForm.reset();
 
         updateRoomOptions();
         calculatePrice();
 
-        alert(
-            "Pemesanan berhasil!\n" +
-            "Nama: " + guestName + "\n" +
-            "Kamar: " + room.number + "\n" +
-            "Total: " + formatRupiah(activeGuests[activeGuests.length - 1].totalPrice)
-        );
     });
 }
-
 
 // ==========================================
 // 10. EVENT LISTENER
@@ -378,59 +409,3 @@ if (document.readyState === "loading") {
 } else {
     initApp();
 }
-/* =====================================
-   PESAN KAMAR VIA WHATSAPP
-===================================== */
-
-const bookingForm = document.getElementById("bookingForm");
-
-bookingForm.addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-    // GANTI DENGAN NOMOR WHATSAPP HOTEL
-    const nomorHotel = "6281335342783";
-
-    // Mengambil data pemesanan
-    const nama = document.getElementById("guestName").value;
-
-    const tipeKamar = document.getElementById("roomType")
-        .selectedOptions[0].text;
-
-    const nomorKamar = document.getElementById("roomNumber").value;
-
-    const durasi = document.getElementById("nights").value;
-
-    const paket = document.querySelector(
-        'input[name="package"]:checked'
-    );
-
-    const namaPaket = paket.closest(".radio-card")
-        .querySelector("strong").textContent;
-
-    const total = document.getElementById("summaryTotal")
-        .textContent;
-
-    // Membuat pesan WhatsApp
-    const pesan =
-`Halo BUTTERFLY HOTEL, saya ingin memesan kamar.
-
-Nama Tamu: ${nama}
-Tipe Kamar: ${tipeKamar}
-Nomor Kamar: ${nomorKamar}
-Paket Layanan: ${namaPaket}
-Durasi Menginap: ${durasi} malam
-
-Total Pembayaran: ${total}
-
-Mohon konfirmasi pemesanan saya.
-Terima kasih.`;
-
-    // Membuka WhatsApp
-    const linkWhatsApp =
-        "https://wa.me/" + nomorHotel +
-        "?text=" + encodeURIComponent(pesan);
-
-    window.open(linkWhatsApp, "_blank");
-
-});
