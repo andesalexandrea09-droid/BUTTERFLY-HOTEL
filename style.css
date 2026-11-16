@@ -698,3 +698,38 @@ tbody tr:hover {
         flex-direction: column !important;
     }
 }
+/* MENGATUR URUTAN BAGIAN WEBSITE */
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-grid {
+    display: contents !important;
+}
+
+.hero {
+    order: 0;
+}
+
+.booking-form-container {
+    order: 1;
+}
+
+.catalog-section {
+    order: 2;
+}
+
+.right-column {
+    order: 3;
+    width: 100%;
+}
+
+.guest-list-container {
+    order: 4;
+}
+
+.site-footer {
+    order: 5;
+}
