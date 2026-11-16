@@ -102,7 +102,83 @@
       </div>
     </section>
 
-      <section class="booking-grid" id="bookingSection">
+     <section class="booking-grid" id="bookingSection">
+
+    <!-- KOLOM KIRI: FORM PEMESANAN -->
+    <div class="booking-form-container">
+
+        <section class="card">
+            <h2>Form Pemesanan Kamar</h2>
+
+            <form id="bookingForm">
+
+                <!-- PINDAHKAN SEMUA ISI FORM LAMA
+                     MULAI NAMA LENGKAP TAMU
+                     SAMPAI TOMBOL KONFIRMASI
+                     KE SINI -->
+
+            </form>
+        </section>
+
+    </div>
+
+    <!-- KOLOM KANAN -->
+    <div class="right-column">
+
+        <section class="card availability-card">
+
+            <h2>Status Ketersediaan Kamar</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No. Kamar</th>
+                            <th>Tipe</th>
+                            <th>Tarif/Malam</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="roomStatusList"></tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </div>
+
+</section>
+
+<!-- DAFTAR TAMU MENGINAP -->
+<div class="card guest-list-container">
+
+    <h2>Daftar Tamu Menginap — BUTTERFLY HOTEL</h2>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Tamu</th>
+                    <th>Kamar</th>
+                    <th>Paket</th>
+                    <th>Durasi</th>
+                    <th>Total Tagihan</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+
+            <tbody id="guestListTable">
+                <tr>
+                    <td colspan="6" class="empty-message">
+                        Belum ada tamu yang check-in.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
 
     <!-- KOLOM KIRI: FORM PEMESANAN -->
     <div class="booking-form-container">
