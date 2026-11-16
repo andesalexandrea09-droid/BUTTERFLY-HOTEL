@@ -5,36 +5,59 @@
 function initApp() {
 
     // Menghubungkan tombol PILIH KAMAR INI
-    document.querySelectorAll(".btn-select")
-        .forEach(button => {
+    const selectButtons = document.querySelectorAll(".btn-select");
 
-            button.addEventListener("click", function() {
+    selectButtons.forEach(button => {
 
-                const selectedRoom = this.dataset.room;
+        button.addEventListener("click", function() {
 
-                selectRoomFromMenu(selectedRoom);
+            // Mengambil tipe kamar yang dipilih
+            const selectedRoom = this.dataset.room;
 
-            });
+            // Memasukkan kamar ke formulir
+            selectRoomFromMenu(selectedRoom);
 
         });
 
-    // Menampilkan nomor kamar tersedia
+    });
+
+
+    // Menampilkan nomor kamar yang tersedia
     updateRoomOptions();
 
-    // Menampilkan status kamar
+
+    // Menampilkan status ketersediaan kamar
     renderRoomStatus();
 
-    // Menampilkan daftar tamu
+
+    // Menampilkan daftar tamu menginap
     renderGuestList();
+
 
     // Menghitung harga awal
     calculatePrice();
 
+
     // Menampilkan tahun otomatis
-    document.getElementById("currentYear").textContent =
-        new Date().getFullYear();
+    const yearElement = document.getElementById("currentYear");
+
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
 
 }
 
-// Jalankan aplikasi
-initApp();
+
+// ==========================================
+// MENJALANKAN APLIKASI
+// ==========================================
+
+if (document.readyState === "loading") {
+
+    document.addEventListener("DOMContentLoaded", initApp);
+
+} else {
+
+    initApp();
+
+}
