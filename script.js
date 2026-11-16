@@ -378,3 +378,59 @@ if (document.readyState === "loading") {
 } else {
     initApp();
 }
+/* =====================================
+   PESAN KAMAR VIA WHATSAPP
+===================================== */
+
+const bookingForm = document.getElementById("bookingForm");
+
+bookingForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    // GANTI DENGAN NOMOR WHATSAPP HOTEL
+    const nomorHotel = "6281335342783";
+
+    // Mengambil data pemesanan
+    const nama = document.getElementById("guestName").value;
+
+    const tipeKamar = document.getElementById("roomType")
+        .selectedOptions[0].text;
+
+    const nomorKamar = document.getElementById("roomNumber").value;
+
+    const durasi = document.getElementById("nights").value;
+
+    const paket = document.querySelector(
+        'input[name="package"]:checked'
+    );
+
+    const namaPaket = paket.closest(".radio-card")
+        .querySelector("strong").textContent;
+
+    const total = document.getElementById("summaryTotal")
+        .textContent;
+
+    // Membuat pesan WhatsApp
+    const pesan =
+`Halo BUTTERFLY HOTEL, saya ingin memesan kamar.
+
+Nama Tamu: ${nama}
+Tipe Kamar: ${tipeKamar}
+Nomor Kamar: ${nomorKamar}
+Paket Layanan: ${namaPaket}
+Durasi Menginap: ${durasi} malam
+
+Total Pembayaran: ${total}
+
+Mohon konfirmasi pemesanan saya.
+Terima kasih.`;
+
+    // Membuka WhatsApp
+    const linkWhatsApp =
+        "https://wa.me/" + nomorHotel +
+        "?text=" + encodeURIComponent(pesan);
+
+    window.open(linkWhatsApp, "_blank");
+
+});
